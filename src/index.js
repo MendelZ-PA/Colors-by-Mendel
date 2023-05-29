@@ -1,32 +1,29 @@
-const hexInput = document.getElementById("hexInput");
-const inputColor = document.getElementById("inputColor");
+const hexInput = document.getElementById('hexInput');
+const inputColor = document.getElementById('inputColor');
+const sliderText = document.getElementById('sliderText');
+const slider = document.getElementById('slider');
 
 hexInput.addEventListener("keyup", () => {
+
   const hex = hexInput.value;
   if (!isValidHex(hex)) return;
 
-  const strippedHex = hex.replace("#", "");
+  const strippedHex = hex.replace('#', '');
 
   inputColor.style.backgroundColor = "#" + strippedHex;
-});
+})
 
 const isValidHex = (hex) => {
   if (!hex) return false;
 
-  const strippedHex = hex.replace("#", "");
+  const strippedHex = hex.replace('#', '');
   return strippedHex.length === 3 || strippedHex.length === 6;
 };
-
-//Create a function to convert Hex to RGB
-//this should work with 3 or 6 character hex values
-//Hint - useParseInt("", 16) to convert a hex value to a decimal value
-//should return an object with 3 properties - r, g, and b
-//Test your function with a few different use cases
 
 const convertHexToRGB = (hex) => {
   if (!isValidHex(hex)) return null;
 
-  let strippedHex = hex.replace("#", "");
+  let strippedHex = hex.replace('#', '');
 
   if (strippedHex.length === 3) {
     strippedHex = strippedHex[0] + strippedHex[0] + strippedHex[1] + strippedHex[1] + strippedHex[2] + strippedHex[2];
@@ -38,3 +35,35 @@ const convertHexToRGB = (hex) => {
 
   return { r, g, b };
 };
+
+const convertRGBToHex = (r,g,b) => {
+  const firstPair = ("0" + r.toString(16)).slice(-2);
+  const secondPair = ("0" + g.toString(16)).slice(-2);
+  const thirdPair = ("0" + b.toString(16)).slice(-2);
+  const hex = "#" + firstPair + secondPair = thirdPair;
+  return hex;
+}
+
+//Create the alterColor function which accepts hex value and percentage
+//convert the hex value to rgb
+//increase each r,g,b value by appropriate amount (percentage of 255)
+//use the new r,g,b values to convert to a hex value
+//return the hex value
+
+const alterColor = (hex, percentage) => {
+  const {r,g,b} = convertHexToRGB(hex);
+
+  const amount = Math.floor((percentage/100) * 255)
+
+  const newR = r + amount;
+  const newG = g + amount;
+  const newB = b + amount;
+  console.log(newR, newG, newB);
+  return convertRGBToHex(newR, newG, newB);
+}
+
+console.log(alterColor('fff', 10));
+
+slider.addEventListener('input', () => {
+  sliderText.textContent = `${slider.value}%`;
+})
