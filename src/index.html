@@ -8,19 +8,34 @@
   </head>
   <body>
 
-    <div class="container">
-      <h1 class="title">Color Lighten/Darken</h1>
+    <div className="container">
+      <h1 className="title">Color Lighten/Darken</h1>
 
       <label for="hex">Color (hex)</label>
       <input type="text" name="hex" id="hexInput" 
-      placeholder="000000"/>
+      placeholder="000000" value="#c6d5ac"/>
+
+      <!-- div with a class of toggle -->
+      <!-- two pieces of text - lighten/darken -->
+      <!-- div id toggleBtn  and inside
+      will have a  inner-circle -->
+
+      <div className="toggle">
+        <p id="lightenText"
+        className="toggle-text">Lighten</p>
+        <div id="toggleBtn" className="toggle-btn">
+          <div className="inner-circle"/>
+        </div>
+        <p id="darkenText"
+        className="toggle-text unselected">Darken</p>
+      </div>
 
       <label for="slider" id="sliderText">0%</label>
       <input type="range" min="0" max="100" value="0" 
-        class="slider" id="slider" name="slider"/>
+        className="slider" id="slider" name="slider"/>
       <p>Input Color</p>
       <div id="inputColor" className="box"></div>
-      <p>Altered Color</p>
+      <p id="alteredColorText">Altered Color</p>
       <div id="alteredColor" className="box"></div>
     </div>
 
